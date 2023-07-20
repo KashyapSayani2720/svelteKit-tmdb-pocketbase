@@ -14,8 +14,6 @@ export const actions = {
 
 		try {
 			
-			console.log("locals : ",locals.pb.collection('users'))
-
 			const newUser = await locals.pb.collection('users').create(data);
 
 			const { token, user } = await locals.pb.collection('users').authWithPassword(data.email, data.password);

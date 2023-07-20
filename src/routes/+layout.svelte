@@ -5,6 +5,7 @@
     export let data;
 </script>
 
+{#if false}
 <div class="bg-neutral text-neutral-content">
 	<div class="max-w-xl mx-auto navbar">
 		<!-- <div class="navbar-start">
@@ -25,7 +26,7 @@
 								};
 							}}
 						>
-							<button>Log out</button>
+							<button>Log Out</button>
 						</form>
 					</li>
 				{:else}
@@ -36,7 +37,8 @@
 		</div>
 	</div>
 </div>
+{/if}
 
-<div class="max-w-xl mx-auto py-8 px-4">
+<div>
 	<slot />
 </div>

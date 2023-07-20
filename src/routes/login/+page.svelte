@@ -1,33 +1,55 @@
 <script>
 </script>
 
-<div class="flex flex-col items-center h-full w-full pt-12">
-	
-	<h2 class="mt-2 text-center text-3xl font-bold tracking-tight text-base-content">
-		Sign in to your account please
-	</h2>
-	<p class="text-center mt-1">
-		Or <a href="/register" class="text-primary font-medium hover:cursor-pointer">register</a> if you don't
-		already have an account.
-	</p>
-	<div class="bg-white py-6 shadow-md rounded-lg w-full max-w-sm mt-6">
-		<form method="POST" action="?/login" class="flex flex-col items-center space-y-2 w-full">
-			<div class="form-control w-full max-w-xs">
-				<label for="email" class="label font-medium pb-1">
-					<span class="label-text">Email</span>
-				</label>
-				<input type="email" name="email" class="input input-bordered w-full max-w-xs" />
+<section class="vh-100 gradient-custom">
+	<div class="container h-100">
+	  <div class="row d-flex justify-content-center align-items-center h-100">
+		<div class="col-12 col-md-8 col-lg-6 col-xl-5">
+		  <div class="card bg-dark text-white" style="border-radius: 1rem;">
+			<div class="card-body p-5 text-center">
+				<form method="POST" action="?/login">	
+					<div class="mb-md-5 mt-md-4">
+		
+						<h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+						<p class="text-white-50 mb-5">Please Enter Your Credentials !</p>
+		
+						<div class="form-outline form-white mb-4">
+						<label class="form-label" for="typeEmailX">Email</label>
+						<input type="email" name="email" class="form-control form-control-md" />
+						</div>
+		
+						<div class="form-outline form-white mb-4">
+						<label class="form-label" for="typePasswordX">Password</label>
+						<input type="password" name="password" class="form-control form-control-md" />
+						</div>
+		
+						<p class="small mb-5 pb-lg-2"><a class="text-white-50" href="/forgot_password">Forgot password?</a></p>
+		
+						<button class="btn btn-dark px-5">Login</button>
+					</div>
+				</form>
+  
+			  <div>
+				<p class="mb-0">Don't have an account? <a href="/register" class="text-white-50 fw-bold">Register</a>
+				</p>
+			  </div>
+  
 			</div>
-			<div class="form-control w-full max-w-xs">
-				<label for="password" class="label font-medium pb-1">
-					<span class="label-text">Password</span>
-				</label>
-				<input type="password" name="password" class="input input-bordered w-full max-w-xs" />
-			</div>
-			<div class="w-full max-w-xs pt-3">
-				<button class="btn btn-primary w-full max-w-xs">Login</button>
-				<a href="/forgot_password">Forgot Password ?</a>
-			</div>
-		</form>
+		  </div>
+		</div>
+	  </div>
 	</div>
-</div>
+  </section>
+
+  <style>
+		.gradient-custom {
+			/* fallback for old browsers */
+			background: #6a11cb;
+
+			/* Chrome 10-25, Safari 5.1-6 */
+			background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+
+			/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+			background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+		}
+</style>

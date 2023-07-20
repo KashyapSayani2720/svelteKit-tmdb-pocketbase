@@ -42,6 +42,8 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"mdb-ui-kit": "^6.4.0",
+		"mdbsvelte": "^1.0.12",
 		"pocketbase": "^0.15.3"
 	}
 }
