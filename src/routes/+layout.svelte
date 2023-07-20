@@ -1,45 +1,42 @@
 <script lang="ts">
+	import NProgress from 'nprogress';
+	import 'nprogress/nprogress.css';
+	import "uno.css";
+	import { navigating } from '$app/stores';
+	import '$lib/assets/css/global.css';
+	import Seo from '$lib/components/Seo.svelte';
+	import Sidebar from '$lib/components/Sidebar.svelte';
 	import { applyAction, enhance } from '$app/forms';
-	import { page } from '$app/stores';
-	import { currentUser, pb } from '$lib/pocketbase';
-	// import '../app.postcss';
+
+	NProgress.configure({
+		// Full list: https://github.com/rstacruz/nprogress#configuration
+		minimum: 0.16
+	});
+
+	$: {
+		if ($navigating) {
+			NProgress.start();
+		}
+		if (!$navigating) {
+			NProgress.done();
+		}
+	}
+
     export let data;
 </script>
 
+<Seo />
 {#if data?.profile}
-<div class="bg-neutral text-neutral-content">
-	<div class="max-w-xl mx-auto navbar">
-		<!-- <div class="navbar-start">
-			<a href="/" class="btn btn-ghost text-xl">PB + SK</a>
-		</div> -->
-		<div class="navbar-end">
-			<ul class="menu menu-horizontal">
-				{#if data.profile}
-					<li><a href="/">{data.profile.email}</a></li>
-					<li>
-						<form
-							method="POST"
-							action="/logout"
-							use:enhance={() => {
-								return async ({ result }) => {
-									pb.authStore.clear();
-									await applyAction(result);
-								};
-							}}
-						>
-							<button>Log Out</button>
-						</form>
-					</li>
-				{:else}
-					<li><a href="/login">Log in</a></li>
-					<li><a href="/register">Register</a></li>
-				{/if}
-			</ul>
-		</div>
+
+<main class="lg:grid lg:grid-cols-[6%_94%] h-full">
+	<Sidebar />
+	<div class="lg:grid-area-[1/2]">
+		<slot />
 	</div>
-</div>
+</main>
+{:else}
+	<div>
+		<slot />
+	</div>
 {/if}
 
-<div>
-	<slot />
-</div>
