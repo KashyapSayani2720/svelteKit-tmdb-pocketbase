@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { applyAction, enhance } from '$app/forms';
+	import { page } from '$app/stores';
 	import { currentUser, pb } from '$lib/pocketbase';
 	// import '../app.postcss';
     export let data;
 </script>
 
-{#if false}
+{#if data?.profile}
 <div class="bg-neutral text-neutral-content">
 	<div class="max-w-xl mx-auto navbar">
 		<!-- <div class="navbar-start">
