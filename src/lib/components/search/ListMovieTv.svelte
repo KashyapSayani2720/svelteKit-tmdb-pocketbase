@@ -35,6 +35,7 @@
 						</div>
 					</div>
 				</a>
+				<button class="btn btn-danger i-ph-heart-light"/>
 			</div>
 		{/each}
 		<!-- {/if} -->

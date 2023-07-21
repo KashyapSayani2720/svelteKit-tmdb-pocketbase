@@ -65,6 +65,6 @@
 				};
 			}}
 		>
-	<button class="btn btn-danger">Log Out</button>
-</form>
+		<button class="btn btn-danger i-ph-sign-out-fill"/>
+	</form>
 </div>

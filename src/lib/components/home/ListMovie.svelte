@@ -17,7 +17,7 @@
 
 
 </script>
-	<div class="">
+	<div class="container-fluid">
 		<div class="text-white text-center text-2xl m-4">{title}</div>
 		<div class='{$page.route.id == "/movies" ? 'row' : (!isMobile ? 'row ' : '')} flex gap-4 overflow-x-auto pb-6 justify-content-center'>
 			{#each content as item}
@@ -38,9 +38,8 @@
 							</div>
 						</div>
 					</a>
+					<button class="btn btn-danger i-ph-heart-light"/>
 				</div>
 			{/each}
 		</div>
 	</div>
-
-<style></style>
