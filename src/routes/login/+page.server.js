@@ -14,6 +14,7 @@ export const actions = {
 
 		try {
 			const { token, user } = await locals.pb.collection("users").authWithPassword(data.email, data.password);
+
 		} catch (err) {
 			console.log('Error:', err);
 			return {

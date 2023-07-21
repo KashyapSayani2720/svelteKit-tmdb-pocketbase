@@ -26,10 +26,10 @@
 			label: 'Movies'
 		},
 		{
-			link: '/tv',
+			link: '/watchlist',
 			iconActive: 'i-ph-television-simple-fill',
 			icon: 'i-ph-television-simple-light',
-			label: 'TV'
+			label: 'Watch List'
 		},
 		{
 			link: '/search',

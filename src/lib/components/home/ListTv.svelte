@@ -13,7 +13,7 @@
 		<div class="flex gap-4 overflow-x-auto pb-6">
 			{#each content as item}
 				<div data-sveltekit-preload-code class="flex flex-col bg-gray-9 p-2 rounded-md">
-					<a href="/tv/{item.id}" class="text-white decoration-none">
+					<a href="/watchlist/{item.id}" class="text-white decoration-none">
 						<div class="w-230px h-370px lt-md:w-200px lt-md:h-300px">
 							<ImageLoader
 								src={`${import.meta.env.VITE_PUBLIC_IMAGE_URL}w300/${item.poster_path}`}

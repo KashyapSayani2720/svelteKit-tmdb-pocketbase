@@ -68,7 +68,7 @@
 {:else if listData.length === 0}
 	<div class="flex flex-col justify-center items-center">
 		<div class="i-ph-film-strip w-10 h-10 mb-2" />
-		Movie/TV Not Found
+		Movie Not Found
 	</div>
 {:else}
 	<div class="mb-30">
