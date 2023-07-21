@@ -40,8 +40,8 @@
 					<div class="text-5xl font-semibold lt-md:text-4xl">{content.title}</div>
 					<div class="flex gap-3 mt-4 mb-3 lt-md:flex-col">
 						<div class="flex gap-2">
-							<StarRating rating={content.vote_average} class="w-25" />
-							<div class="text-gray-5">{content.vote_average.toFixed(1)}</div>
+							<!-- <StarRating rating={content.vote_average} class="w-25" /> -->
+							<!-- <div class="text-gray-5">{content?.vote_average?.toFixed(1)}</div> -->
 						</div>
 						<div class="text-gray-5 font-light flex gap-3">
 							<div>{formatNumber(content.vote_count)} Reviews</div>
