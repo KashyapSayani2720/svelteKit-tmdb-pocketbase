@@ -38,7 +38,7 @@
 							</div>
 						</div>
 					</a>
-					<button class="btn btn-danger i-ph-heart-light"/>
+					<span class="text-base font-light line-clamp-1"><button class="btn btn-danger i-ph-plus-light" /> Add To Watchlist</span>
 				</div>
 			{/each}
 		</div>
