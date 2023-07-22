@@ -15,14 +15,31 @@ export const load: PageServerLoad = async ({ locals }) => {
 
 		const urlListMovie = `${import.meta.env.VITE_SECRET_API_URL}/discover/movie?${params}`;
 
-		const resposeListMovie = await fetch(urlListMovie);
+		const url = `${import.meta.env.VITE_SVELTEKIT_API_BASE_URL}api/movies`;
+	
+		const data = {
+			is_watch_list: true,
+			user_id: locals.pb.authStore.baseModel.id,
+			url: urlListMovie
+		};
+	
+		const options = {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(data),
+		};
+
+		const resposeListMovie = await fetch(url,options);
 
 		const jsonListMovie: { page: string; results: any } = await resposeListMovie.json();
 	
 		return {
-			list_movie_popular: jsonListMovie.results,
+			list_movie_popular: jsonListMovie,
 			user_id:locals.pb.authStore.baseModel.id
 		};
+
 	} catch (error) {
 		console.log(error);
 		throw new Error('error get list movie popular');

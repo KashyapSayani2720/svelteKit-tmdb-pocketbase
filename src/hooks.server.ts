@@ -2,7 +2,7 @@ import PocketBase from 'pocketbase';
 
 /** @type {import('@sveltejs/kit').Handle} */
 export const handle = async({ event, resolve }) => {
-    event.locals.pb = new PocketBase("https://postgres-gui.fly.dev/");
+    event.locals.pb = new PocketBase(import.meta.env.VITE_POCKETBASE_URL);
 
     // load the store data from the request cookie string
     event.locals.pb.authStore.loadFromCookie(event.request.headers.get('cookie') || '');

@@ -8,23 +8,44 @@ export const load: PageServerLoad = async ({ locals }) => {
 		throw redirect(303, '/login');
 	}
 
-	try {
-		const params = `api_key=${
-			import.meta.env.VITE_SECRET_API_KEY_V3
-		}&language=en-US&append_to_response=videos,images,credits,external_ids,release_dates&include_image_language=en`;
+	const params = `api_key=${
+		import.meta.env.VITE_SECRET_API_KEY_V3
+	}&language=en-US&append_to_response=videos,images,credits,external_ids,release_dates&include_image_language=en`;
 
-		const urlListMovie = `${import.meta.env.VITE_SECRET_API_URL}/discover/movie?${params}`;
+	const urlListMovie = `${import.meta.env.VITE_SECRET_API_URL}/discover/movie?${params}`;
 
-		const resposeListMovie = await fetch(urlListMovie);
-
-		const jsonListMovie: { page: string; results: any } = await resposeListMovie.json();
+	const url = `${import.meta.env.VITE_SVELTEKIT_API_BASE_URL}api/movies`;
 	
-		return {
-			list_movie_popular: jsonListMovie.results,
-			user_id:locals.pb.authStore.baseModel.id
-		};
+	const data = {
+		user_id: locals.pb.authStore.baseModel.id,
+		url: urlListMovie
+	};
+  
+	const options = {
+	  method: 'POST',
+	  headers: {
+		'Content-Type': 'application/json',
+	  },
+	  body: JSON.stringify(data),
+	};
+  
+	try {
+	  const resposeListMovie = await fetch(url, options);
+
+	  if (!resposeListMovie.ok) {
+		// Handle non-2xx responses if needed
+		throw new Error('Network response was not ok');
+	  }
+	  
+	  const jsonListMovie: { page: string; results: any } = await resposeListMovie.json();
+	
+	return {
+		list_movie_popular: jsonListMovie,
+		user_id:locals.pb.authStore.baseModel.id
+	};
+	
 	} catch (error) {
-		console.log(error);
-		throw new Error('error get list movie popular');
+	  console.error('Error calling the endpoint:', error);
+	  throw error;
 	}
 };

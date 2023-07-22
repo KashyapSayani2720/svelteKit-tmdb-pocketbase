@@ -1,7 +1,7 @@
 <script lang="ts">
+	import ListSearchMovie from './../../lib/components/search/ListSearchMovie.svelte';
 	// import { enhance, type SubmitFunction } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
-	import ListMovieTv from '$lib/components/search/ListMovieTv.svelte';
 	import type { IListMovie, IListTv } from '$lib/types/movie';
 	import { browser } from '$app/environment';
 	import type { ActionData, PageData } from './$types';
@@ -13,19 +13,14 @@
 		user_id: String;
 	};
 
-	console.log("user_id : ",data.user_id)
-	// export let data: PageData;
-	// console.log(form);
 	let isLoading: boolean = false;
 	let curr_page: number = 1;
 	let search: string = '';
 	let listData: IListMovie[] & IListTv[] = form?.data ?? [];
-	let totalPages: number = form?.total_pages ?? 0;
 
 </script>
 
 <form action="?/search" method="POST" class="flex justify-center items-center w-full">
-	<!-- use:enhance={submitSearchMovieTv} -->
 	<input type="hidden" name="curr_page" value={curr_page} />
 	<input
 		type="text"
@@ -51,6 +46,6 @@
 	</div>
 {:else}
 	<div class="mb-30">
-		<ListMovie user_id={data.user_id} title="" content={listData} />
+		<ListMovieSearch content={listData} />
 	</div>
 {/if}
