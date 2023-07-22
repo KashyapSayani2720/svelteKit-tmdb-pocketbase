@@ -1,17 +1,31 @@
 {
+	// Extends the TypeScript configuration from .svelte-kit/tsconfig.json
 	"extends": "./.svelte-kit/tsconfig.json",
+
+	// Compiler options
 	"compilerOptions": {
+		// Allow JavaScript files to be used in TypeScript project
 		"allowJs": true,
+
+		// Check JavaScript files for type errors
 		"checkJs": true,
+
+		// Allow default import syntax for CommonJS modules
 		"esModuleInterop": true,
+
+		// Enforce consistent casing of file names
 		"forceConsistentCasingInFileNames": true,
+
+		// Enable importing JSON modules
 		"resolveJsonModule": true,
+
+		// Skip type checking of declaration files
 		"skipLibCheck": true,
+
+		// Generate source maps for better debugging experience
 		"sourceMap": true,
+
+		// Enable strict type checking
 		"strict": true
 	}
-	// Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
-	//
-	// If you want to overwrite includes/excludes, make sure to copy over the relevant includes/excludes
-	// from the referenced tsconfig.json - TypeScript does not merge them in
 }
