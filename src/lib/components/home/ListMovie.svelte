@@ -13,6 +13,7 @@
 	export let content: IListMovie[] | any = [];
 	export let user_id: String | "";
 	export let isWatchList = false;
+	export let isFilter = false;
 
 	const contentStore = writable<IListMovie[]>(content);
 	
@@ -103,7 +104,7 @@
 
 	<div class="container-fluid">
 		<div class="text-white text-center text-2xl m-4 fw-bold">{title}</div>
-		{#if !isWatchList}
+		{#if isFilter}
 		<div class="d-flex justify-content-center align-tems-center flex-wrap gap-3 m-4">
 			<MultiSelect
 				bind:selected={selectedGenre}
