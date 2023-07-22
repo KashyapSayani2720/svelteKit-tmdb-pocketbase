@@ -35,9 +35,7 @@ export const load: PageServerLoad = async ({ locals }) => {
       },
       body: JSON.stringify(data),
     };
-
     
-    // const urlListTvPopular = `${import.meta.env.VITE_SECRET_API_URL}/watchlist/popular?${params}`;
     const resposeListMovie = await fetch(url, options);
 
     if (!resposeListMovie.ok) {
@@ -46,7 +44,6 @@ export const load: PageServerLoad = async ({ locals }) => {
     }
 
     const resposeListMovieGenre = await fetch(urlListMovieGenre);
-    // const resposeListTv = await fetch(urlListTvPopular);
 
     const jsonListMovie: IListMovie[] = await resposeListMovie.json();
     const jsonListMovieGenre: { genres: any } = await resposeListMovieGenre.json();

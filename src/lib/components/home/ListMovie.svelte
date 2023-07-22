@@ -18,7 +18,7 @@
 	
 	const pb = new PocketBase(import.meta.env.VITE_POCKETBASE_URL);
 
-	export let genre: IGenreMovieList[] | any = [];
+	export let genre: IGenreMovieList[] |  [];
 
 	// console.log('content...', content);
 	const startYear = 2010;
@@ -42,12 +42,13 @@
 		const { movie_list_with_filter } = await filterMovies(
 			selectedGenreIds,
 			selectedYear[0] || '',
-			selectedRating
+			selectedRating,
+			user_id
 		);
 
-		if (movie_list_with_filter != 0) {
-			content = movie_list_with_filter;
-		}
+		// if (movie_list_with_filter.length != 0) {
+			contentStore.set(movie_list_with_filter);
+		// }
 	}
 
 	onMount(async () => {

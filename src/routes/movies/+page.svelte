@@ -9,6 +9,7 @@
 		user_id: String;
 		genre_movie_list: IGenreMovieList[];
 	};
+
 </script>
 
 <ListMovie title="Movies" user_id={data.user_id} content={data.list_movie_popular} genre={data.genre_movie_list}/>
