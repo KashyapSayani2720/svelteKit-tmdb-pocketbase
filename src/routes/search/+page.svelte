@@ -1,52 +1,22 @@
 <script lang="ts">
+	import ListSearchMovie from './../../lib/components/search/ListSearchMovie.svelte';
 	// import { enhance, type SubmitFunction } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
-	import ListMovieTv from '$lib/components/search/ListMovieTv.svelte';
 	import type { IListMovie, IListTv } from '$lib/types/movie';
 	import { browser } from '$app/environment';
 	import type { ActionData, PageData } from './$types';
+	import ListMovie from '$lib/components/home/ListMovie.svelte';
+	
 	export let form: ActionData;
-	// export let data: PageData;
-	// console.log(form);
+
 	let isLoading: boolean = false;
 	let curr_page: number = 1;
 	let search: string = '';
 	let listData: IListMovie[] & IListTv[] = form?.data ?? [];
-	let totalPages: number = form?.total_pages ?? 0;
 
-	// const submitSearchMovieTv: SubmitFunction = ({ form, data, action, cancel }) => {
-	// 	const { search } = Object.fromEntries(data);
-	// 	isLoading = true;
-
-	// 	if (search.length < 1) {
-	// 		alert('form cannot be blank!');
-	// 		isLoading = false;
-	// 		cancel();
-	// 	}
-
-	// 	return async ({ result, update }) => {
-	// 		isLoading = false;
-	// 		switch (result.type) {
-	// 			case 'success':
-	// 				// totalPages = result?.data;
-	// 				listData = [];
-	// 				listData.push(...(result?.data?.data ?? []));
-
-	// 				form.reset();
-	// 				await invalidateAll();
-	// 				break;
-	// 			case 'failure':
-	// 				break;
-	// 			default:
-	// 				break;
-	// 		}
-	// 		await update();
-	// 	};
-	// };
 </script>
 
 <form action="?/search" method="POST" class="flex justify-center items-center w-full">
-	<!-- use:enhance={submitSearchMovieTv} -->
 	<input type="hidden" name="curr_page" value={curr_page} />
 	<input
 		type="text"
@@ -72,21 +42,6 @@
 	</div>
 {:else}
 	<div class="mb-30">
-		<ListMovieTv content={listData} />
-		<!-- <form
-			action="?/search"
-			method="POST"
-			use:enhance={submitSearchMovieTv}
-			class="flex justify-center items-center w-full {curr_page + 1 === totalPages ? 'hidden' : ''}"
-		>
-			<input type="hidden" name="curr_page" value={curr_page} />
-			<input type="hidden" name="search" value={search} />
-			<button
-				class="bg-transparent w-1/2 border-1 border-primary text-white rounded-md p-4 text-base hover:bg-primary cursor-pointer"
-				on:click={() => (curr_page = curr_page + 1)}
-			>
-				Load more
-			</button>
-		</form> -->
+		<ListSearchMovie content={listData} />
 	</div>
 {/if}

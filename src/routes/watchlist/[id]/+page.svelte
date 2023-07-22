@@ -15,11 +15,6 @@
 	];
 </script>
 
-<!-- CSR -->
-<!-- <Suspense>
-	<Detail id={Number($page.params.id)} />
-</Suspense> -->
-
 <div class="lt-lg:mb-20">
 	<Detail content={data} />
 	<div class="flex justify-center gap-10 mt-10 lt-lg:mt-0 lt-lg:grid lt-lg:grid-cols-3 lt-lg:gap-0">

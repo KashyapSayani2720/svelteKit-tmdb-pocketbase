@@ -11,7 +11,7 @@
 		{#each content as item}
 			<div data-sveltekit-preload-code class="mb-6 bg-gray-9 p-2 rounded-md">
 				<a
-					href="/{item.media_type === 'movie' ? 'movies' : 'tv'}/{item.id}"
+					href="/movies/{item.id}"
 					class="text-white decoration-none"
 				>
 					<div class="w-full h-370px rounded-md lt-xs:h-250px lt-md:h-300px">
@@ -22,7 +22,7 @@
 									: ''
 							}`}
 							alt="poster-{item.id}"
-							classes="object-cover rounded-t-md"
+							classes="rounded-t-md"
 						/>
 					</div>
 					<div class="p-2">
@@ -35,7 +35,6 @@
 						</div>
 					</div>
 				</a>
-				<span class="text-base font-light line-clamp-1"><button class="btn btn-danger i-ph-plus-light" /> Add To Watchlist</span>
 			</div>
 		{/each}
 		<!-- {/if} -->

@@ -6,18 +6,17 @@
 	<div class="container h-100">
 		<div class="row d-flex justify-content-center align-items-center h-100">
 			<div class="col-12 col-md-8 col-lg-6 col-xl-5">
-				<div class="card text-white" style="border-radius: 1rem;background:#111827">
+				<div class="card text-white" style="border-radius: 1rem;background:#111827;">
 					<div class="card-body p-5 text-center">
 						<form method="POST" action="?/login">
 							<div class="mb-md-5 mt-md-4">
 								<h2 class="fw-bold mb-2 text-uppercase">Login</h2>
 								<p class="text-white-50 mb-5">Please Enter Your Credentials !</p>
-								<div class="error text-danger">
-									{#if form?.error}
+								<div class={`error-success ${form?.error ? 'text-danger' : 'text-success'}`}>
+									{#if form?.message}
 										<p>{form?.message}</p>
 									{/if}
 								</div>
-
 								<div class="form-outline form-white mb-4" style="text-align:left;">
 									<label class="form-label" for="typeEmailX">Email</label>
 									<input type="email" name="email" class="form-control form-control-md" />
@@ -32,7 +31,7 @@
 									<a class="text-white-50" href="/forgot_password">Forgot password?</a>
 								</p>
 
-								<button class="btn px-5" style="background-color: #fc682f;">Login</button>
+								<button class="btn px-5" style="background-color:#fc682f">Login</button>
 							</div>
 						</form>
 
@@ -49,6 +48,7 @@
 	</div>
 </section>
 
+<!-- Custom CSS style for the background gradient -->
 <style>
 	.gradient-custom {
 		/* fallback for old browsers */
