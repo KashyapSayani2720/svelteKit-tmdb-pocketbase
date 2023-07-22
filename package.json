@@ -38,6 +38,7 @@
 		"@sveltejs/adapter-auto": "^2.1.0",
 		"nprogress": "^0.2.0",
 		"pocketbase": "^0.15.3",
-		"svelte-device-detector": "^0.2.2"
+		"svelte-device-detector": "^0.2.2",
+		"svelte-multiselect": "^10.1.0"
 	}
 }

@@ -154,3 +154,8 @@ export interface IContentFromMovie {
 		data: IListTv[];
 	};
 }
+
+export interface IGenreMovieList{
+	id?: number;
+	name?: string;
+}

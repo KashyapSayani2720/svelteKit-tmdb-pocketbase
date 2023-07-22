@@ -13,15 +13,16 @@ export const actions = {
 		const data = Object.fromEntries([...formData]);
 
 		try {
-			const { token, user } = await locals.pb.collection("users").authWithPassword(data.email, data.password);
-
+			const { token, record } = await locals.pb.collection("users").authWithPassword(data.email, data.password);
+			if (record.verified) {
+				return { status: 200, error: false, message: "Logged in Successfully" }
+			}
+			else {
+				return { status: 400, error: true, message: "Please verified your email!" }
+			}
 		} catch (err) {
 			console.log('Error:', err);
-			return {
-				error: true,
-				email: data.email
-			};
+			return { status: 400, error: true, message: "Email or Password is incorrect!" }
 		}
-		throw redirect(303, '/');
 	}
 };
