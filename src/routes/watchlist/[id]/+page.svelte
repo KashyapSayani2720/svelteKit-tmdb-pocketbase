@@ -1,50 +1,44 @@
-import { redirect } from "@sveltejs/kit";
+<script lang="ts">
+	import Detail from '$lib/components/detail/Detail.svelte';
+	import Overview from '$lib/components/detail/Overview.svelte';
+	import Photos from '$lib/components/detail/Photos.svelte';
+	import Videos from '$lib/components/detail/Videos.svelte';
+	import type { IDetailMovie } from '$lib/types/movie';
 
-/**
- * Actions for form submission in the SvelteKit application.
- * @type {import('./$types').Actions}
- */
-export const actions = {
-  default: async ({ locals, request }) => {
-    try {
-      // Parsing form data from the request
-      const formData = await request.formData();
-      const data = Object.fromEntries([...formData]);
+	export let data: IDetailMovie;
 
-      // Creating a new user in the database
-      const newUser = await locals.pb.collection('users').create(data);
-      // Requesting email verification for the new user
-      const verifiedUser = await locals.pb.collection('users').requestVerification(data.email);
+	let activeTab: number = 1;
+	const listTabDetail = [
+		{ tab: 1, label: 'OVERVIEW' },
+		{ tab: 2, label: 'VIDEOS' },
+		{ tab: 3, label: 'PHOTOS' }
+	];
+</script>
 
-      // Returning a success status
-      return { status: 200 }
+<div class="lt-lg:mb-20">
+	<Detail content={data} />
+	<div class="flex justify-center gap-10 mt-10 lt-lg:mt-0 lt-lg:grid lt-lg:grid-cols-3 lt-lg:gap-0">
+		{#each listTabDetail as tab}
+			<button
+				on:click={() => (activeTab = tab.tab)}
+				class="btn text-xl px-0 py-1 font-bold cursor-pointer lt-lg:p-4 lt-lg:text-sm lt-lg:font-light 
+				{activeTab === tab.tab
+					? 'border-b border-white font-semibold lt-lg:bg-gray-8 lt-lg:border-none'
+					: 'text-gray-7 font-light lt-lg:bg-gray-9'}
+				"
+			>
+				{tab.label}
+			</button>
+		{/each}
+	</div>
 
-    } catch (err) {
-      console.log("Error", err);
-      if (err.response.data.email) {
-        // Handling error when email is already registered
-        return {
-          status: 400,
-          error: true,
-          message: "Email already registered!",
-        };
-      }
-      else if (err.response.data.passwordConfirm) {
-        // Handling error when password confirmation fails
-        return {
-          status: err.status,
-          error: true,
-          message: err.response.message,
-        };
-      }
-      else {
-        // Handling other general errors
-        return {
-          status: err.status,
-          error: true,
-          message: err.response.message,
-        };
-      }
-    }
-  },
-};
+	{#if activeTab === 1}
+		<Overview content={data} />
+	{:else if activeTab === 2}
+		<Videos content={data} />
+	{:else}
+		<Photos content={data} />
+	{/if}
+</div>
+
+<style></style>

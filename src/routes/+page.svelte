@@ -1,5 +1,3 @@
-<!-- This component displays a banner and lists of popular, top-rated, upcoming, and now playing movies -->
-
 <script lang="ts">
 	import BannerHome from '$lib/components/home/BannerHome.svelte';
 	import ListMovie from '$lib/components/home/ListMovie.svelte';
@@ -19,3 +17,6 @@
 	<BannerHome content={data.banner} type="movies" />
 	<ListMovie user_id={data.user_id} title="Popular Movies" content={data.list_movie_popular} />
 	<ListMovie user_id={data.user_id} title="Top Rated Movies" content={data.list_movie_top_rated} />
+	<ListMovie user_id={data.user_id} title="Upcoming Movies" content={data.list_movie_upcoming} />
+	<ListMovie user_id={data.user_id} title="Now Playing Movies" content={data.list_movie_now_playing} />
+</div>
