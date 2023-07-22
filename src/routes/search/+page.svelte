@@ -46,6 +46,6 @@
 	</div>
 {:else}
 	<div class="mb-30">
-		<ListMovieSearch content={listData} />
+		<ListSearchMovie content={listData} />
 	</div>
 {/if}
