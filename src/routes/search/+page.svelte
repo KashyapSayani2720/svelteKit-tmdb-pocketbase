@@ -5,7 +5,15 @@
 	import type { IListMovie, IListTv } from '$lib/types/movie';
 	import { browser } from '$app/environment';
 	import type { ActionData, PageData } from './$types';
+	import ListMovie from '$lib/components/home/ListMovie.svelte';
+	
 	export let form: ActionData;
+
+	export let data: {
+		user_id: String;
+	};
+
+	console.log("user_id : ",data.user_id)
 	// export let data: PageData;
 	// console.log(form);
 	let isLoading: boolean = false;
@@ -14,35 +22,6 @@
 	let listData: IListMovie[] & IListTv[] = form?.data ?? [];
 	let totalPages: number = form?.total_pages ?? 0;
 
-	// const submitSearchMovieTv: SubmitFunction = ({ form, data, action, cancel }) => {
-	// 	const { search } = Object.fromEntries(data);
-	// 	isLoading = true;
-
-	// 	if (search.length < 1) {
-	// 		alert('form cannot be blank!');
-	// 		isLoading = false;
-	// 		cancel();
-	// 	}
-
-	// 	return async ({ result, update }) => {
-	// 		isLoading = false;
-	// 		switch (result.type) {
-	// 			case 'success':
-	// 				// totalPages = result?.data;
-	// 				listData = [];
-	// 				listData.push(...(result?.data?.data ?? []));
-
-	// 				form.reset();
-	// 				await invalidateAll();
-	// 				break;
-	// 			case 'failure':
-	// 				break;
-	// 			default:
-	// 				break;
-	// 		}
-	// 		await update();
-	// 	};
-	// };
 </script>
 
 <form action="?/search" method="POST" class="flex justify-center items-center w-full">
@@ -72,21 +51,6 @@
 	</div>
 {:else}
 	<div class="mb-30">
-		<ListMovieTv content={listData} />
-		<!-- <form
-			action="?/search"
-			method="POST"
-			use:enhance={submitSearchMovieTv}
-			class="flex justify-center items-center w-full {curr_page + 1 === totalPages ? 'hidden' : ''}"
-		>
-			<input type="hidden" name="curr_page" value={curr_page} />
-			<input type="hidden" name="search" value={search} />
-			<button
-				class="bg-transparent w-1/2 border-1 border-primary text-white rounded-md p-4 text-base hover:bg-primary cursor-pointer"
-				on:click={() => (curr_page = curr_page + 1)}
-			>
-				Load more
-			</button>
-		</form> -->
+		<ListMovie user_id={data.user_id} title="" content={listData} />
 	</div>
 {/if}

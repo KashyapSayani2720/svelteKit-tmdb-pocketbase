@@ -14,7 +14,6 @@
 		{ tab: 3, label: 'PHOTOS' }
 	];
 
-	console.log(data);
 </script>
 
 <!-- CSR -->

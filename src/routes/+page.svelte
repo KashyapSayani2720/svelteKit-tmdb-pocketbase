@@ -9,13 +9,14 @@
 		list_movie_top_rated: IListMovie[];
 		list_movie_upcoming: IListMovie[];
 		list_movie_now_playing: IListMovie[];
+		user_id: String
 	};
 </script>
 
 <div class="lt-lg:mb-20">
 	<BannerHome content={data.banner} type="movies" />
-	<ListMovie title="Popular Movies" content={data.list_movie_popular} />
-	<ListMovie title="Top Rated Movies" content={data.list_movie_top_rated} />
-	<ListMovie title="Upcoming Movies" content={data.list_movie_upcoming} />
-	<ListMovie title="Now Playing Movies" content={data.list_movie_now_playing} />
+	<ListMovie user_id={data.user_id} title="Popular Movies" content={data.list_movie_popular} />
+	<ListMovie user_id={data.user_id} title="Top Rated Movies" content={data.list_movie_top_rated} />
+	<ListMovie user_id={data.user_id} title="Upcoming Movies" content={data.list_movie_upcoming} />
+	<ListMovie user_id={data.user_id} title="Now Playing Movies" content={data.list_movie_now_playing} />
 </div>

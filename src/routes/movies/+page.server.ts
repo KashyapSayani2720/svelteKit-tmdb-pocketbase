@@ -15,27 +15,13 @@ export const load: PageServerLoad = async ({ locals }) => {
 
 		const urlListMovie = `${import.meta.env.VITE_SECRET_API_URL}/discover/movie?${params}`;
 
-		// const urlListTvPopular = `${import.meta.env.VITE_SECRET_API_URL}/watchlist/popular?${params}`;
 		const resposeListMovie = await fetch(urlListMovie);
-		// const resposeListTv = await fetch(urlListTvPopular);
 
 		const jsonListMovie: { page: string; results: any } = await resposeListMovie.json();
-		// const jsonListTv: { page: string; results: any } = await resposeListTv.json();
-
-		// let jsonDetailMovie = [];
-
-		// if (jsonListMovie) {
-		// 	const urlBannerPopular = `${import.meta.env.VITE_SECRET_API_URL}/movie/${
-		// 		jsonListMovie.results[0].id
-		// 	}?${params}`;
-		// 	const resposeBanner = await fetch(urlBannerPopular);
-		// 	const data = await resposeBanner.json();
-		// 	jsonDetailMovie = data;
-		// }
+	
 		return {
-			// banner: jsonDetailMovie,
 			list_movie_popular: jsonListMovie.results,
-			// list_tv_popular: jsonListTv.results
+			user_id:locals.pb.authStore.baseModel.id
 		};
 	} catch (error) {
 		console.log(error);

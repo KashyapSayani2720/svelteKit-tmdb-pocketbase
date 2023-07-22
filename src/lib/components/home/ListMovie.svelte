@@ -5,22 +5,89 @@
 	import ImageLoader from '../image/ImageLoader.svelte';
 	import StarRating from '../StarRating.svelte';
 	
+	import PocketBase from 'pocketbase';
+	import { writable } from 'svelte/store';
+	
 	export let title: string;
 	export let content: IListMovie[] | any = [];
+	export let user_id: String | "";
+	export let isWatchList = false;
+
+	const contentStore = writable<IListMovie[]>(content);
 	
+	const pb = new PocketBase('https://postgres-gui.fly.dev');
+
+	let media_ids = new Array();
+	let media = new Array();
+
 	let isMobile = false;
-	
-	onMount(async () => {
+
+	onMount(async ()=> {
+		// fetch a paginated records list
+		const favorites = await pb.collection("watch_list").getFullList({
+			filter: `user_id = "${user_id}"`
+		});
+
+		media_ids = favorites.map((fav)=>fav.media_id);
+
+		contentStore.set($contentStore.map((content)=> media_ids.includes(content.id) ? { ...content, addedToWatchlist: true } : { ...content, addedToWatchlist: false } ));
+		
+		isWatchList && contentStore.set($contentStore.filter((content)=> content.addedToWatchlist));
+
 		const userAgent = navigator.userAgent.toLowerCase();
 		isMobile = /mobile|android|ios|iphone|ipad|ipod/i.test(userAgent);
-  	});
+	});
 
+	function updateContext(movie:IListMovie){
+		contentStore.update(store => {
+				const index = store.findIndex(item => item.id === movie.id);
+				if (index !== -1) {
+					// If movie exists in the store, update its addedToWatchlist property
+					const updatedItem = { ...store[index], addedToWatchlist: !movie.addedToWatchlist };
+					return [...store.slice(0, index), updatedItem, ...store.slice(index + 1)];
+				}
+				return store; // If movie not found, return the original store
+    		});
+		
+		isWatchList && contentStore.set($contentStore.filter((content)=> content.addedToWatchlist));
+	}
+
+	async function handleWatchList(movie: IListMovie){
+
+		const data = {
+			"user_id" : user_id,
+			"media_id": movie.id
+		};
+
+		if(movie.addedToWatchlist){
+			const media = await pb.collection("watch_list").getFullList({
+				// aka. `id="id1" || id="id2" || ...`
+				filter: `id="${user_id}"` && `media_id="${movie.id}"`
+			});	
+
+			
+			const record = await pb.collection('watch_list').delete(media[0].id);
+
+			if(record){
+				updateContext(movie);
+			}
+		}
+		else{
+			const record = await pb.collection('watch_list').create(data);
+			if(record.media_id){
+				updateContext(movie);
+			}
+		}
+	}
 
 </script>
+
+	
+
 	<div class="container-fluid">
 		<div class="text-white text-center text-2xl m-4">{title}</div>
 		<div class='{$page.route.id == "/movies" ? 'row' : (!isMobile ? 'row ' : '')} flex gap-4 overflow-x-auto pb-6 justify-content-center'>
-			{#each content as item}
+			{#each $contentStore as item}
 				<div data-sveltekit-preload-code class="col-lg-2 bg-gray-9 p-2 rounded-md w-300px  justify-content-center">
 					<a href="/movies/{item.id}" class="text-white decoration-none">
 						<div class="">
@@ -38,8 +105,15 @@
 							</div>
 						</div>
 					</a>
-					<span class="text-base font-light line-clamp-1"><button class="btn btn-danger i-ph-plus-light" /> Add To Watchlist</span>
+					<span class="text-gray-4 font-light text-sm" ><button class="btn btn-danger {item.addedToWatchlist ? 'i-ph-plus-fill' : 'i-ph-plus-light'}" on:click={() => handleWatchList(item)} />{!isMobile ? (item.addedToWatchlist ? "Added To Watchlist" : "Add To Watchlist") : ""}</span>
 				</div>
 			{/each}
 		</div>
 	</div>
+
+	{#if $contentStore.length == 0}
+		<div class="flex flex-col justify-center items-center">
+			<div class="i-ph-film-strip w-10 h-10 mb-2" />
+			Waatch List Movie Not Found
+		</div>
+	{/if}

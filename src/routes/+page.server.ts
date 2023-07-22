@@ -46,7 +46,8 @@ export const load: PageServerLoad = async ({ locals }) => {
 			list_movie_popular: jsonListMoviePopular.results,
 			list_movie_top_rated: jsonListMovieTopRated.results,
 			list_movie_upcoming: jsonListMovieUpComing.results,
-			list_movie_now_playing: jsonListMovieNowPlaying.results
+			list_movie_now_playing: jsonListMovieNowPlaying.results,
+			user_id:locals.pb.authStore.baseModel.id
 		};
 	} catch (error) {
 		console.log(error);

@@ -128,6 +128,7 @@ export interface IListMovie {
 	vote_count: number;
 	media_type?: string;
 	original_title?: string;
+	addedToWatchlist?: boolean;
 }
 
 export interface IListTv {
