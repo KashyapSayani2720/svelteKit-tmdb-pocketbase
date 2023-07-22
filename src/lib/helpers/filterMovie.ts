@@ -1,4 +1,6 @@
-export async function filterMovies(genre: string, year:string, rating:string, user_id:string){
+import type { IListMovie } from "$lib/types/movie";
+
+export async function filterMovies(genre: string, year:string, rating:string, user_id:String){
     try {
         let params = '';
         if (rating == 'Above 5'){
@@ -42,7 +44,7 @@ export async function filterMovies(genre: string, year:string, rating:string, us
           
         const resposeListMovieWithFilter = await fetch(url, options);
 
-		const jsonListMovieWithGenre: {page: string, results: any } = await resposeListMovieWithFilter.json();
+		const jsonListMovieWithGenre: IListMovie[] = await resposeListMovieWithFilter.json();
         
 		return {
 			movie_list_with_filter: jsonListMovieWithGenre

@@ -18,7 +18,7 @@
 	
 	const pb = new PocketBase(import.meta.env.VITE_POCKETBASE_URL);
 
-	export let genre: IGenreMovieList[] |  [];
+	export let genre: IGenreMovieList[] = new Array();
 
 	// console.log('content...', content);
 	const startYear = 2010;
@@ -103,6 +103,7 @@
 
 	<div class="container-fluid">
 		<div class="text-white text-center text-2xl m-4 fw-bold">{title}</div>
+		{#if !isWatchList}
 		<div class="d-flex justify-content-center align-tems-center flex-wrap gap-3 m-4">
 			<MultiSelect
 				bind:selected={selectedGenre}
@@ -138,6 +139,7 @@
 				--sms-options-margin="10px 0px 0px 0px"
 			/>
 		</div>
+		{/if}
 		<div class='{["/movies","/watchlist"].includes($page.route.id) ? 'row justify-content-center' : (!isMobile ? 'row justify-content-center' : '')} flex gap-4 overflow-x-auto pb-5 mb-5'>
 			{#each $contentStore as item}
 				<div data-sveltekit-preload-code class="col-lg-2 col-md-4 col-sm-12	 bg-gray-9 p-2 rounded-md w-300px justify-content-center">
