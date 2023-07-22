@@ -13,7 +13,7 @@
 								<h2 class="fw-bold mb-2 text-uppercase">Login</h2>
 								<p class="text-white-50 mb-5">Please Enter Your Credentials !</p>
 								<div class={`error-success ${form?.error ? 'text-danger' : 'text-success'}`}>
-									{#if form?.message}
+									{#if form?.error}
 										<p>{form?.message}</p>
 									{/if}
 								</div>

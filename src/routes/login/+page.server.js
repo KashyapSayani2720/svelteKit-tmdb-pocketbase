@@ -4,8 +4,10 @@ import { redirect } from '@sveltejs/kit';
 // This function is called during server-side rendering (SSR) and is used to check if the user is authenticated.
 // If the user is authenticated (based on the 'isValid' property of 'authStore' in 'locals.pb'), it will redirect them to the homepage ('/') with a 303 status code.
 // 'locals' is an object containing data related to the current request/response.
+
 export const load = ({ locals }) => {
-  if (locals.pb.authStore.isValid) {
+
+  if (locals.pb.authStore.isValid && locals.pb.authStore.baseModel.verified) {
     throw redirect(303, '/');
   }
 };
@@ -21,6 +23,7 @@ export const actions = {
 
 		try {
 			const { token, record } = await locals.pb.collection("users").authWithPassword(data.email, data.password);
+			
 			if (record.verified){
 				return { status: 200, error: false, message: "Logged in Succesfully" }
 			}else{

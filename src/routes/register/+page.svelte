@@ -23,13 +23,13 @@
 									<div class="col-lg-6 col-xl-12">
 										<div class="form-outline form-white mb-4">
 											<label class="form-label" for="name">Name</label>
-											<input type="name" name="name" class="form-control form-control-md" />
+											<input required type="name" name="name" class="form-control form-control-md" />
 										</div>
 									</div>
 									<div class="col-lg-6 col-xl-12">
 										<div class="form-outline form-white mb-4">
 											<label class="form-label" for="email">Email</label>
-											<input type="email" name="email" class="form-control form-control-md" />
+											<input required type="email" name="email" class="form-control form-control-md" />
 										</div>
 									</div>
 								</div>
@@ -38,7 +38,7 @@
 									<div class="col-lg-6 col-xl-12">
 										<div class="form-outline form-white mb-4">
 											<label class="form-label" for="password">Password</label>
-											<input type="password" name="password" class="form-control form-control-md" />
+											<input required minlength="8" type="password" name="password" class="form-control form-control-md" />
 										</div>
 									</div>
 
@@ -46,6 +46,8 @@
 										<div class="form-outline form-white mb-4">
 											<label class="form-label" for="passwordConfirm">Confirm Password</label>
 											<input
+												required
+												minlength="8"
 												type="password"
 												name="passwordConfirm"
 												class="form-control form-control-md"
